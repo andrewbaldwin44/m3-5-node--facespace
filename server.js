@@ -4,7 +4,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 
-const { handleHomepage, handleProfilePage } = require('./handlers.js');
+const { handleHomepage, handleProfilePage, handleLogin, handleName } = require('./handlers.js');
 
 // declare the 404 function
 const handleFourOhFour = (req, res) => {
@@ -22,6 +22,8 @@ express()
   // endpoints
   .get('/', handleHomepage)
   .get('/users/:id', handleProfilePage)
+  .get('/login', handleLogin)
+  .post('/getname', handleName)
 
   // a catchall endpoint that will send the 404 message.
   .get('*', handleFourOhFour)
