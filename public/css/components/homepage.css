@@ -16,6 +16,7 @@
   border: 1px solid var(--primary-color);
   width: 120px;
   transition: all ease 400ms;
+  cursor: pointer;
 }
 .homepage__all--user img:hover {
   border: 5px solid var(--primary-color);

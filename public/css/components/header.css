@@ -12,6 +12,10 @@
   color: #fff;
   margin-top: 4px;
 }
+.header .site-title {
+  cursor: pointer;
+  text-decoration: none;
+}
 .signin-button {
   background: var(--primary-color);
   border: 2px solid var(--primary-color);

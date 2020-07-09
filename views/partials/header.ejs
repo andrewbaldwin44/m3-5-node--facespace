@@ -7,5 +7,14 @@
 </head>
 <body>
   <header class="header">
-      <h1 class='site-title'>Facespace</h1>
+      <a class='site-title' href='../../../'><h1>Facespace</h1></a>
+      <% if (authenticated) { %>
+        <span class="signin-button">
+          <%= `Howdy, ${user.name}` %>
+        </span>
+      <% } else { %>
+        <a type="button" class="signin-button" href="../../../login">
+          Login
+        </a>
+      <% } %>
   </header>

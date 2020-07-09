@@ -4,7 +4,8 @@ const express = require('express');
 const morgan = require('morgan');
 
 
-const { handleHomepage, handleProfilePage, handleLogin, handleName } = require('./handlers.js');
+const { handleHomepage, handleProfilePage, handleLogin,
+        handleName, handleAuthentication } = require('./handlers.js');
 
 // declare the 404 function
 const handleFourOhFour = (req, res) => {
@@ -22,6 +23,7 @@ express()
   // endpoints
   .get('/', handleHomepage)
   .get('/users/:id', handleProfilePage)
+  .get('/users/authenticated/:id', handleAuthentication)
   .get('/login', handleLogin)
   .post('/getname', handleName)
 
