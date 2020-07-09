@@ -30,8 +30,33 @@
   text-decoration: none;
   transition: all ease 400ms;
 }
-.signin-button:hover {
+.signin-button:hover, .visible-signin {
   background: #fff;
   color: var(--primary-color);
   cursor: pointer;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: none;
+  background-color: white;
+  box-shadow: 3px 3px 5px 2px gray;
+  right: 22px;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  width: 135px;
+}
+
+.visible-dropdown {
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: lightgray;
 }

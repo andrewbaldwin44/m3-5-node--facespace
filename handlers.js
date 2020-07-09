@@ -2,10 +2,6 @@ const { users } = require('./data/users');
 let currentUser = {};
 let authenticated = false;
 
-function handleHomepage(req, res) {
-  res.status(200).render('./pages/homepage', { users: users, user: currentUser, authenticated: authenticated });
-}
-
 function findUser(value, key = '_id') {
   return users.find(user => user[key] == value);
 }
@@ -18,6 +14,12 @@ function findFriends(friendIDs) {
 
 function isLoggedIn() {
   return Object.keys(currentUser).length !== 0;
+}
+
+function handleHomepage(req, res) {
+  res.status(200)
+     .render('./pages/homepage', { users: users, user: currentUser,
+                                   authenticated: authenticated });
 }
 
 function handleProfilePage(req, res, next) {
@@ -52,6 +54,15 @@ function handleLogin(req, res, next) {
   else next();
 }
 
+function handleLogout(req, res, next) {
+  if (isLoggedIn()) {
+    currentUser = {};
+    authenticated = false;
+    res.status(200).redirect('/');
+  }
+  else next();
+}
+
 function handleName(req, res) {
   const firstName = req.body.firstName;
 
@@ -67,4 +78,5 @@ function handleName(req, res) {
   else res.status(404).redirect('./login');
 }
 
-module.exports = { handleHomepage, handleProfilePage, handleLogin, handleName, handleAuthentication };
+module.exports = { handleHomepage, handleProfilePage, handleLogin,
+                   handleLogout, handleName, handleAuthentication };

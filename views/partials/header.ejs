@@ -7,13 +7,20 @@
 </head>
 <body>
   <header class="header">
-      <a class='site-title' href='../../../'><h1>Facespace</h1></a>
+      <a class='site-title' href='/'><h1>Facespace</h1></a>
       <% if (authenticated) { %>
-        <span class="signin-button">
-          <%= `Howdy, ${user.name}` %>
-        </span>
+        <div class="dropdown">
+          <button id="dropdown-button" class="signin-button">
+            <%= `Howdy, ${user.name}` %>
+          </button>
+          <div id="dropdown-content" class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="/logout">Logout</a>
+          </div>
+        </div>
+      <script src="/scripts/header.js"></script>  
       <% } else if (typeof onLogin === 'undefined') { %>
-        <a type="button" class="signin-button" href="../../../login">
+        <a type="button" class="signin-button" href="/login">
           Login
         </a>
       <% } %>

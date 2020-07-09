@@ -9,7 +9,7 @@
   <ul class="profile-page__friends--list">
     <% user.friends.forEach(friend => { %>
       <li class="friend">
-        <a href=<%= `../../../users/${friend._id}` %>>
+        <a href=<%= `/users/${friend._id}` %>>
           <img src="<%= friend.avatarUrl %>"  />
         </a>
         <p><%= friend.name %></p>
