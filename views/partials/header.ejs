@@ -12,7 +12,7 @@
         <span class="signin-button">
           <%= `Howdy, ${user.name}` %>
         </span>
-      <% } else { %>
+      <% } else if (typeof onLogin === 'undefined') { %>
         <a type="button" class="signin-button" href="../../../login">
           Login
         </a>

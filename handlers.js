@@ -48,7 +48,7 @@ function handleAuthentication(req, res, next) {
 }
 
 function handleLogin(req, res, next) {
-  if (!isLoggedIn()) res.render('./pages/login', { authenticated: authenticated });
+  if (!isLoggedIn()) res.render('./pages/login', { authenticated: authenticated, onLogin: true });
   else next();
 }
 
