@@ -14,11 +14,11 @@
             <%= `Howdy, ${user.name}` %>
           </button>
           <div id="dropdown-content" class="dropdown-content">
-            <a href="#">Profile</a>
+            <a href=<%= `/users/authenticated/${user._id}` %>>Profile</a>
             <a href="/logout">Logout</a>
           </div>
         </div>
-      <script src="/scripts/header.js"></script>  
+      <script src="/scripts/header.js"></script>
       <% } else if (typeof onLogin === 'undefined') { %>
         <a type="button" class="signin-button" href="/login">
           Login

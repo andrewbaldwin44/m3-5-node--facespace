@@ -3,7 +3,9 @@ let currentUser = {};
 let authenticated = false;
 
 function findUser(value, key = '_id') {
-  return users.find(user => user[key] == value);
+  return users.find(user => {
+    return user[key] == value
+  });
 }
 
 function findFriends(friendIDs) {
@@ -26,14 +28,18 @@ function handleProfilePage(req, res, next) {
   const userID = req.params.id;
 
   if (isLoggedIn() && currentUser._id == userID) {
-    res.status(200).redirect(`./authenticated/${currentUser._id}`);
+    res.status(200).redirect(`/users/authenticated/${currentUser._id}`);
   }
   else {
-    searchedUser = findUser(userID);
+    console.log('*************')
+    const searchedUser = {...findUser(userID)};
 
     if (searchedUser) {
       searchedUser.friends = findFriends(searchedUser.friends);
-      res.status(200).render('./pages/profile', { user: searchedUser, authenticated: authenticated });
+      console.log(users)
+
+      res.status(200).render('./pages/profile', { user: searchedUser,
+                                                  authenticated: authenticated });
     }
     else next();
   }
@@ -44,7 +50,8 @@ function handleAuthentication(req, res, next) {
 
   if (isLoggedIn() && currentUser._id == authenticatedID) {
     authenticated = true;
-    res.status(200).render('./pages/profile', { user: currentUser, authenticated: authenticated });
+    res.status(200).render('./pages/authenticated_profile', { user: currentUser,
+                                                              authenticated: authenticated });
   }
   else next();
 }
@@ -66,16 +73,16 @@ function handleLogout(req, res, next) {
 function handleName(req, res) {
   const firstName = req.body.firstName;
 
-  const searchedUser = findUser(firstName, 'name');
+  const authenticateUser = {...findUser(firstName, 'name')};
 
-  if (searchedUser) {
-    searchedUser.friends = findFriends(searchedUser.friends);
+  if (authenticateUser) {
+    authenticateUser.friends = findFriends(authenticateUser.friends);
 
-    currentUser = {...searchedUser};
+    currentUser = {...authenticateUser};
 
-    res.status(200).redirect(`./users/authenticated/${currentUser._id}`);
+    res.status(200).redirect(`/users/authenticated/${currentUser._id}`);
   }
-  else res.status(404).redirect('./login');
+  else res.status(404).redirect('/login');
 }
 
 module.exports = { handleHomepage, handleProfilePage, handleLogin,
